@@ -1,3 +1,7 @@
+
+This repository is being used to learn ReactJS through the Udemy React - The Complete Guide (incl Hooks, React Router, and Redux) class.
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
