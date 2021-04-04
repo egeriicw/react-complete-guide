@@ -2,6 +2,11 @@ import React, { useState } from 'react';
 import './App.css';
 import Person from './Person/Person'
 
+
+// this is a stateful component as the 'app' component.
+// should have more stateless components versus stateful components. 
+// Otherwise you risk spaghetti code for having to work through all
+// the variations of how a components state may be modified.
 const app = props => {
   const [personsState, setPersonsState] = useState({
     // useState is the most important 'use' Hooks! You don't need to
