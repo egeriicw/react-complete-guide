@@ -23,8 +23,12 @@ class App extends Component {
     })
   }
 
+  /* A flaw, in javascript, objects and arrays are reference types. 
+  Best practive is to copy the object/array and then edit. 
+  Always update state with an immutable approach. */   
   deletePersonHandler = (personIndex) => {
-    const persons =this.state.persons;
+    /* either use .slice() or use ... approach to create copy */
+    const persons = [...this.state.persons];
     persons.splice(personIndex, 1);
     this.setState({persons: persons});
   }
