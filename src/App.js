@@ -5,22 +5,29 @@ import Person from './Person/Person'
 class App extends Component {
   state = {
     persons: [
-      {name: "Max", age: 28},
-      {name: "Manu", age: 29},
-      {name: "Stephanie", age: 26}
+      {id: 'fdasa', name: "Max", age: 28},
+      {id: 'fdwad', name: "Manu", age: 29},
+      {id: 'ratat', name: "Stephanie", age: 26}
     ],
     otherState: "Some other value",
     showPersons: false,
   }
   
-  nameChangedHandler = (event) => {
-    this.setState({
-      persons: [
-        {name: "Max", age: 28},
-        {name: event.target.value, age: 29},
-        {name: "Stephanie", age: 27}
-      ]
-    })
+  nameChangedHandler = (event, id) => {
+    const personIndex = this.state.persons.findIndex(p => {
+      return p.id === id;
+    });
+
+    const person = {
+      ...this.state.persons[personIndex]
+    };
+
+    person.name = event.target.value;
+
+    const persons = [...this.state.persons];
+    persons[personIndex] = person;
+
+    this.setState({persons: persons});
   }
 
   /* A flaw, in javascript, objects and arrays are reference types. 
@@ -63,7 +70,9 @@ class App extends Component {
                     /* either use this arrow handler syntax or bind syntax */
                     click={() => this.deletePersonHandler(index)} 
                     name={person.name} 
-                    age={person.age} />
+                    age={person.age} 
+                    key={person.id} 
+                    changed={(event) => this.nameChangedHandler(event, person.id)} />
           })}
           {/* <Person 
             name={this.state.persons[0].name} 
