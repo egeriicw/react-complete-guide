@@ -13,17 +13,6 @@ class App extends Component {
     showPersons: false,
   }
   
-  switchNameHandler = (newName) => {
-    // console.log("Was Clicked!");
-    this.setState({
-      persons: [
-        {name: newName, age: 28},
-        {name: "Manu", age: 29},
-        {name: "Stephanie", age: 27}
-      ]
-    })
-  }
-
   nameChangedHandler = (event) => {
     this.setState({
       persons: [
@@ -33,6 +22,13 @@ class App extends Component {
       ]
     })
   }
+
+  deletePersonHandler = (personIndex) => {
+    const persons =this.state.persons;
+    persons.splice(personIndex, 1);
+    this.setState({persons: persons});
+  }
+
 
   togglePersonsHandler = () => {
     const doesShow = this.state.showPersons;
@@ -58,8 +54,10 @@ class App extends Component {
       persons = (
         /* javascript syntax for React handling of lists */
         <div>
-          {this.state.persons.map(person => {
-            return <Person 
+          {this.state.persons.map((person, index) => {
+            return <Person
+                    /* either use this arrow handler syntax or bind syntax */
+                    click={() => this.deletePersonHandler(index)} 
                     name={person.name} 
                     age={person.age} />
           })}
